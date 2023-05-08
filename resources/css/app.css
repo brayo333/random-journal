@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --appColor-black: #000000;
+    --appColor-lightGrey: #eceef6;
+    --appColor-white: #ffffff;
+    --appColor-dark: #373838;
+    --appColor-darkAccent: #44759a;
+    --appColor-main: #be927a;
+    --appColor-lightAccent: #96ac6a;
+    --appColor-light: #edebe8;
+
+    --appColor-error: #ffe5e5;
+    --appColor-errorText: #ba000d;
+    --appColor-success: #cdf8b4;
+    --appColor-successText: #478427;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Background colors */
+.appBgColorBlack {
+    background-color: var(--appColor-black);
+}
+.appBgColorDark {
+    background-color: var(--appColor-dark);
+}
+.appBgColorDarkAccent {
+    background-color: var(--appColor-darkAccent);
+}
+.appBgColorMain {
+    background-color: var(--appColor-main);
+}
+.appBgColorLightAccent {
+    background-color: var(--appColor-lightAccent);
+}
+.appBgColorLight {
+    background-color: var(--appColor-light);
+}
+.appBgColorWhite {
+    background-color: var(--appColor-white);
+}
+.appBgColorLightGrey {
+    background-color: var(--appColor-lightGrey);
+}
+.appBgColorError {
+    background-color: var(--appColor-error);
+}
+.appBgColorSuccess {
+    background-color: var(--appColor-success);
+}
+.appBgGradient {
+    background: var(--appColor-gradient);
+}
+
+/* Text colors */
+.textColorBlack {
+    color: var(--appColor-black);
+}
+.textColorDark {
+    color: var(--appColor-dark);
+}
+.textColorDarkAccent {
+    color: var(--appColor-darkAccent);
+}
+.textColorMain {
+    color: var(--appColor-main);
+}
+.textColorLightAccent {
+    color: var(--appColor-lightAccent);
+}
+.textColorLight {
+    color: var(--appColor-light);
+}
+.textColorLightGrey {
+    color: var(--appColor-lightGrey);
+}
+.textColorError {
+    color: var(--appColor-errorText);
+}
+.textColorSuccess {
+    color: var(--appColor-successText);
+}
