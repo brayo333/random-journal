@@ -22,6 +22,11 @@
     font-family: "Poppins", sans-serif;
 }
 
+body {
+    color: var(--appColor-black);
+    background-color: var(--appColor-light);
+}
+
 /* Background colors */
 .appBgColorBlack {
     background-color: var(--appColor-black);
@@ -84,4 +89,26 @@
 }
 .textColorSuccess {
     color: var(--appColor-successText);
+}
+
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    /* background: transparent; */
+    background: var(--appColor-light);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--dashColor-dark);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dashColor-darkAccent);
 }

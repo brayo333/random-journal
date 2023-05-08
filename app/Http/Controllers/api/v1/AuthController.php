@@ -39,7 +39,11 @@ class AuthController extends Controller
         ]);
 
         if (!Auth::attempt($login)) {
-            return response(['message' => 'Invalid login credentials!'], Response::HTTP_UNAUTHORIZED);
+            return redirect('/login')->with('notification', [
+                'color' => 'red',
+                'title' => 'Failed',
+                'message' => 'Invalid login credentials!',
+            ]);
         }
 
         $token = Auth::user()->createToken('authToken')->accessToken;
