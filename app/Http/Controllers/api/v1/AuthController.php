@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Rules\MyEmailRule;
+use App\Rules\MyPasswordRule;
 
 class AuthController extends Controller
 {
@@ -15,7 +17,7 @@ class AuthController extends Controller
         $validatedData  = $request->validate([
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'unique:users,email', 'max:255', new MyEmailRule],
-            'password' => 'required|string|confirmed',
+            'password' => ['required', 'string', 'confirmed', new MyPasswordRule],
         ]);
 
         $user = User::create([
@@ -24,9 +26,19 @@ class AuthController extends Controller
             'password' => bcrypt($validatedData['password']),
         ]);
 
-        $response = [
-            'user' => $user,
-        ];
+        if (empty($user)) {
+            return redirect('/register')->with('notification', [
+                'color' => 'red',
+                'title' => 'Failed',
+                'message' => 'There was an error with creating an account. Please try again.',
+            ]);
+        } else {
+            return redirect('/login')->with('notification', [
+                'color' => 'green',
+                'title' => 'Success',
+                'message' => 'Your account was created successfully! You may now login.',
+            ]);
+        }
 
         // return response($response, Response::HTTP_CREATED);
     }
@@ -49,6 +61,8 @@ class AuthController extends Controller
         $token = Auth::user()->createToken('authToken')->accessToken;
         $user = Auth::user();
 
+        return redirect('/journal');
+
         // $response = [
         //     'access_token' => $token,
         //     'user' => new UserResource($user),
@@ -59,7 +73,14 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::user()->token()->revoke();
+        Auth::user()->tokens()->delete();
+        Auth::guard('web')->logout();
+
+        return redirect('/')->with('notification', [
+            'color' => 'green',
+            'title' => 'Success',
+            'message' => 'Logged out successfully!',
+        ]);
 
         // return response(['message' => 'Logged out successfully!'], Response::HTTP_OK);
     }

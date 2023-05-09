@@ -1,6 +1,10 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { ref } from "vue";
+import { Link, router } from "@inertiajs/vue3";
+import { Icon } from "@iconify/vue";
 import Button from "../shared/Button.vue";
+
+const showDropdown = ref(false);
 
 const nav_menu = [
     { title: "Random Entries", to: "/journal/random" },
@@ -11,13 +15,13 @@ const closeMobileNav = () => {
     document.getElementById("active").checked = false;
 };
 
-const toAuthPage = (value) => {
-    window.location.href = value;
+const logout = () => {
+    router.post("/logout");
 };
 </script>
 
 <template>
-    <nav class="w-full absolute top-0 z-30 flex flex-row justify-center">
+    <nav class="w-full absolute top-0 z-30 flex flex-row justify-center appBgColorLight">
         <!-- Wide screen nav -->
         <div
             class="md:hidden w-full max-w-[1536px] px-10 py-5 flex flex-row justify-between items-center"
@@ -42,7 +46,10 @@ const toAuthPage = (value) => {
                 </Link>
             </div>
 
-            <div class="flex flex-row items-center">
+            <div
+                v-if="!$page.props.auth.loggedIn"
+                class="flex flex-row items-center"
+            >
                 <Link href="/login">
                     <Button
                         type="button"
@@ -67,6 +74,56 @@ const toAuthPage = (value) => {
                     />
                 </Link>
             </div>
+
+            <div v-else>
+                <div
+                    class="py-1 px-3 flex flex-row items-center rounded-full appBgColorWhite cursor-pointer relative"
+                    @click="showDropdown = !showDropdown"
+                >
+                    <Icon
+                        class=""
+                        icon="ic:baseline-account-circle"
+                        height="30"
+                        color="var(--appColor-black)"
+                    />
+
+                    <p class="ml-2">
+                        {{
+                            $page.props.auth.user.name
+                                ? $page.props.auth.user.name
+                                : "User"
+                        }}
+                    </p>
+
+                    <div
+                        class="p-5 rounded-2xl appBgColorWhite absolute right-0 -bottom-24"
+                        :class="showDropdown ? '' : 'hidden'"
+                    >
+                        <div>
+                            <Button
+                                type="button"
+                                class="w-[140px] h-[36px]"
+                                padding=""
+                                label="Log out"
+                                option="rounded"
+                                backgroundColor="var(--appColor-black)"
+                                color="var(--appColor-light)"
+                                hasIcon
+                                @clicked="
+                                    logout();
+                                    showDropdown = false;
+                                "
+                                ><template #icon
+                                    ><Icon
+                                        class=""
+                                        icon="material-symbols:logout-rounded"
+                                        height="24"
+                                        color="inherit" /></template
+                            ></Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- smaller screen/mobile nav -->
@@ -87,6 +144,15 @@ const toAuthPage = (value) => {
                 <div
                     class="w-full h-full p-5 flex flex-col justify-center capitalize"
                 >
+                    <div class="w-full my-3 text-lg">
+                        <Link
+                            class="capitalize my-3"
+                            href="/"
+                            @click="closeMobileNav"
+                        >
+                            Home
+                        </Link>
+                    </div>
                     <div
                         v-for="item in nav_menu"
                         :key="item.to"
@@ -101,30 +167,62 @@ const toAuthPage = (value) => {
                         </Link>
                     </div>
 
-                    <div class="mt-10 flex flex-row">
+                    <div
+                        v-if="!$page.props.auth.loggedIn"
+                        class="mt-10 flex flex-row"
+                    >
                         <div>
-                            <Button
-                                type="button"
-                                class=""
-                                option="rounded"
-                                label="Sign In"
-                                backgroundColor="var(--appColor-light)"
-                                color="var(--appColor-black)"
-                                border="1px solid var(--appColor-black)"
-                            />
+                            <Link href="/login">
+                                <Button
+                                    type="button"
+                                    class=""
+                                    option="rounded"
+                                    label="Sign In"
+                                    backgroundColor="var(--appColor-light)"
+                                    color="var(--appColor-black)"
+                                    border="1px solid var(--appColor-black)"
+                                    @clicked="closeMobileNav()"
+                                />
+                            </Link>
                         </div>
 
                         <div class="ml-3">
-                            <Button
-                                type="button"
-                                class=""
-                                option="rounded"
-                                label="Sign Up"
-                                backgroundColor="var(--appColor-black)"
-                                color="var(--appColor-light)"
-                                border="1px solid var(--appColor-light)"
-                            />
+                            <Link href="/register">
+                                <Button
+                                    type="button"
+                                    class=""
+                                    option="rounded"
+                                    label="Sign Up"
+                                    backgroundColor="var(--appColor-black)"
+                                    color="var(--appColor-light)"
+                                    border="1px solid var(--appColor-light)"
+                                    @clicked="closeMobileNav()"
+                                />
+                            </Link>
                         </div>
+                    </div>
+
+                    <div v-else class="mt-10">
+                        <Button
+                            type="button"
+                            class=""
+                            padding=""
+                            label="Log out"
+                            option="rounded"
+                            backgroundColor="var(--appColor-black)"
+                            color="var(--appColor-light)"
+                            hasIcon
+                            @clicked="
+                                logout();
+                                closeMobileNav();
+                            "
+                            ><template #icon
+                                ><Icon
+                                    class=""
+                                    icon="material-symbols:logout-rounded"
+                                    height="24"
+                                    color="inherit" /></template
+                        ></Button>
                     </div>
                 </div>
             </div>
@@ -138,6 +236,8 @@ nav {
     -webkit-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
+
+    box-shadow: 0px -4px 10px rgba(23, 21, 31, 0.25);
 }
 
 /* mobile nav */

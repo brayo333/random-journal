@@ -19,7 +19,7 @@ class JournalEntryController extends Controller
      */
     public function index()
     {
-        return JournalEntry::get();
+        return Inertia::render('MainApp/Journal', ['randomEntries' => JournalEntry::get()]);
     }
 
     /**

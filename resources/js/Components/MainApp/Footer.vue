@@ -20,15 +20,3 @@ const currentYear = new Date().getFullYear();
         </div>
     </footer>
 </template>
-
-<style>
-.linkHover {
-    transition: all 0.5s ease-in-out;
-    -webkit-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-}
-.linkHover:hover {
-    color: var(--appColor-darkAccent);
-}
-</style>

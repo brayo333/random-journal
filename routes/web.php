@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\v1\AuthController;
+use App\Http\Controllers\JournalEntryController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -21,10 +22,19 @@ Route::get('/', function () {
 
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
-});
+})->name('register');
+
+Route::post('/register', [AuthController::class, 'register']);
+
 
 Route::get('/login', function () {
     return Inertia::render('Auth/Login');
-});
+})->name('login');
 
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/journal', [JournalEntryController::class, 'index']);
+});

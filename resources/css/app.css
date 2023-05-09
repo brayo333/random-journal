@@ -91,7 +91,6 @@ body {
     color: var(--appColor-successText);
 }
 
-
 /* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 7px;
@@ -111,4 +110,28 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: var(--dashColor-darkAccent);
+}
+
+/* Auth page background styles */
+.imageStyle {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.imageStyleBlur {
+    background-color: rgba(0, 0, 0, 0.5);
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+
+/* Link styles */
+.linkHover {
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+}
+.linkHover:hover {
+    color: var(--appColor-darkAccent);
 }
