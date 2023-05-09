@@ -19,7 +19,20 @@ class JournalEntryController extends Controller
      */
     public function index()
     {
-        return Inertia::render('MainApp/Journal', ['randomEntries' => JournalEntry::get()]);
+        $user = Auth::user()->id;
+
+        $query = JournalEntry::query()->where('user_id', $user)->get();
+
+        return Inertia::render('MainApp/Journal', ['userEntries' => $query]);
+    }
+
+    public function random()
+    {
+        $user = Auth::user()->id;
+
+        $query = JournalEntry::query()->where('user_id', '!=', $user)->get();
+
+        return Inertia::render('MainApp/RandomEntries', ['randomEntries' => $query]);
     }
 
     /**

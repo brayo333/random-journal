@@ -1,5 +1,5 @@
 <script setup>
-const currentYear = new Date().getFullYear();
+// const currentYear = new Date().getFullYear();
 </script>
 
 <template>
@@ -7,7 +7,7 @@ const currentYear = new Date().getFullYear();
         <div className="w-full max-w-[1536px] md:px-5 px-10 py-5">
             <div class="w-full pt-5 text-center text-sm">
                 <p class="textColorBlack">
-                    Copyright {{ currentYear }} &copy;
+                    Made by
                     <a
                         href="https://brianmulaa.com/"
                         target="_blank"

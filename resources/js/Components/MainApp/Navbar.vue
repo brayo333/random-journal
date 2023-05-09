@@ -7,8 +7,8 @@ import Button from "../shared/Button.vue";
 const showDropdown = ref(false);
 
 const nav_menu = [
+    { title: "My Entries", to: "/journal" },
     { title: "Random Entries", to: "/journal/random" },
-    { title: "My Entries", to: "/journal/my-journal" },
 ];
 
 const closeMobileNav = () => {
@@ -21,7 +21,9 @@ const logout = () => {
 </script>
 
 <template>
-    <nav class="w-full absolute top-0 z-30 flex flex-row justify-center appBgColorLight">
+    <nav
+        class="w-full absolute top-0 z-30 flex flex-row justify-center appBgColorLight"
+    >
         <!-- Wide screen nav -->
         <div
             class="md:hidden w-full max-w-[1536px] px-10 py-5 flex flex-row justify-between items-center"
@@ -37,9 +39,10 @@ const logout = () => {
             <!-- Links -->
             <div id="navMenu" class="flex flex-row items-center">
                 <Link
-                    v-for="item in nav_menu"
+                    v-for="(item,index) in nav_menu"
                     :key="item.to"
-                    class="capitalize mx-3"
+                    class="capitalize"
+                    :class="index == nav_menu.length - 1 ? 'ml-3' : 'mr-3'"
                     :href="item.to"
                 >
                     {{ item.title }}
