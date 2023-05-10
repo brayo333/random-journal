@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             app()->make(JournalEntryController::class)->sendDailyEmail();
-        })->dailyAt('12:00');
+        })->dailyAt('19:33');
     }
 
     /**
