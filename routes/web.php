@@ -37,4 +37,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/journal', [JournalEntryController::class, 'index']);
+    Route::post('/journal/new', [JournalEntryController::class, 'store']);
+    Route::delete('/journal/{id}', [JournalEntryController::class, 'destroy']);
+    Route::get('/journal/random', [JournalEntryController::class, 'random']);
 });
