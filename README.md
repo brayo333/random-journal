@@ -23,7 +23,7 @@ You will need two terminals running for the next two:
 
 - Run `php artisan serve` to run the server locally
 - Run `npm run dev` to run the Vue pages (UI/frontend) locally
-- View app locally on a browser on the link `http://127.0.0.1:8000/` or `http://localhost:8000/`
+- View app locally on a browser on the link [http://127.0.0.1:8000/](http://127.0.0.1:8000/) or [http://localhost:8000/](http://localhost:8000/)
 
 You can use another terminal:
 - Run `php artisan schedule:work` to run the scheduler on the foreground ('manually') to test email sending functionality
