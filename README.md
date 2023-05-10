@@ -1,3 +1,5 @@
+# RandomJournal
+
 The application allows users to register, login and make their own journal entries which will be shared anonymously with other users. Users who make an entry between 12pm the previous day and 24hrs from that time receive an email (emails are sent daily at 12pm) with journal entries from other users who shared an entry within the same timeframe. These users may also see the journal entries on the web app only if they meet the same criteria that applies for receiving the email.
 
 The application is made using Laravel, Vue.js and Inertia (PHP and JavaScript). With Tailwind providing a lot of the CSS classes.
