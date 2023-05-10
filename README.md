@@ -28,7 +28,7 @@ You will need two terminals running for the next two:
 You can use another terminal:
 - Run `php artisan schedule:work` to run the scheduler on the foreground ('manually') to test email sending functionality
 
-## Project setup production pointers
+## Project setup (production) pointers
 
 - Remember to change the app environment to 'production' and make necessary changes in the `.env`
 - Run `npm run build` to generate a production build for the frontend
