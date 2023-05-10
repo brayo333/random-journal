@@ -32,8 +32,8 @@ You can use another terminal:
 
 - Remember to change the app environment to 'production' and make necessary changes in the `.env`
 - Run `npm run build` to generate a production build for the frontend
-- You can use `php artisan optimze` to cache server configurations and routes
-- You can use `php artisan optimze:clear` to clear the cache
+- You can use `php artisan optimize` to cache server configurations and routes
+- You can use `php artisan optimize:clear` to clear the cache
 
 - Run `php artisan schedule:run` to run the scheduler on the background for (sending emails). You will need to create a cron on your server for the application. Read this [article](https://www.iankumu.com/blog/laravel-scheduler/).
 
