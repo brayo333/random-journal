@@ -1,10 +1,11 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { Link, router } from "@inertiajs/vue3";
 import { Icon } from "@iconify/vue";
 import Button from "../shared/Button.vue";
 
 const showDropdown = ref(false);
+const scrollPosition = ref(0);
 
 const nav_menu = [
     { title: "My Entries", to: "/journal" },
@@ -18,11 +19,24 @@ const closeMobileNav = () => {
 const logout = () => {
     router.post("/logout");
 };
+
+const updateScroll = () => {
+    scrollPosition.value = window.scrollY;
+};
+
+onMounted(() => {
+    window.addEventListener("scroll", updateScroll);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("scroll", updateScroll);
+});
 </script>
 
 <template>
     <nav
         class="w-full absolute top-0 z-30 flex flex-row justify-center appBgColorLight"
+        :class="[scrollPosition > 50 ? 'navStyle' : '']"
     >
         <!-- Wide screen nav -->
         <div
@@ -39,7 +53,7 @@ const logout = () => {
             <!-- Links -->
             <div id="navMenu" class="flex flex-row items-center">
                 <Link
-                    v-for="(item,index) in nav_menu"
+                    v-for="(item, index) in nav_menu"
                     :key="item.to"
                     class="capitalize"
                     :class="index == nav_menu.length - 1 ? 'ml-3' : 'mr-3'"
@@ -239,7 +253,9 @@ nav {
     -webkit-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
+}
 
+.navStyle {
     box-shadow: 0px -4px 10px rgba(23, 21, 31, 0.25);
 }
 

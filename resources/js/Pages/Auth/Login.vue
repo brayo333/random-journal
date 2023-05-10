@@ -1,6 +1,6 @@
 <script setup>
-import { Link, useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { Link, router, useForm, usePage } from "@inertiajs/vue3";
+import { ref, onMounted } from "vue";
 import { Icon } from "@iconify/vue";
 import imagePath from "../../../img/auth_bg.webp";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
@@ -28,6 +28,12 @@ const submit = () => {
 const togglePasswordVisibility = () => {
     isPasswordVisible.value = !isPasswordVisible.value;
 };
+
+onMounted(() => {
+    if (usePage().props.auth.loggedIn) {
+        router.visit("/journal");
+    }
+});
 </script>
 
 <template>
@@ -140,9 +146,7 @@ const togglePasswordVisibility = () => {
                         />
                     </div>
 
-                    <div
-                        class="mt-5 flex flex-row justify-end"
-                    >
+                    <div class="mt-5 flex flex-row justify-end">
                         <p class="text-sm">
                             Don't have an account?
                             <Link

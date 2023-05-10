@@ -1,6 +1,6 @@
 <script setup>
-import { Link, useForm, router } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { Link, useForm, router, usePage } from "@inertiajs/vue3";
+import { ref, onMounted } from "vue";
 import { Icon } from "@iconify/vue";
 import imagePath from "../../../img/auth_bg.webp";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
@@ -34,6 +34,12 @@ const togglePasswordVisibility = () => {
 const toggleConfirmPasswordVisibility = () => {
     isConfirmPasswordVisible.value = !isConfirmPasswordVisible.value;
 };
+
+onMounted(() => {
+    if (usePage().props.auth.loggedIn) {
+        router.visit("/journal");
+    }
+});
 </script>
 
 <template>
@@ -187,15 +193,10 @@ const toggleConfirmPasswordVisibility = () => {
                         />
                     </div>
 
-                    <div
-                        class="mt-5 flex flex-row justify-end"
-                    >
+                    <div class="mt-5 flex flex-row justify-end">
                         <p class="text-sm">
                             Already registered?
-                            <Link
-                                href="/login"
-                                class="textColorMain linkHover"
-                            >
+                            <Link href="/login" class="textColorMain linkHover">
                                 Login
                             </Link>
                         </p>
@@ -239,7 +240,9 @@ const toggleConfirmPasswordVisibility = () => {
                     Back To Homepage
                 </Link>
 
-                <p class="text-xl text-center textColorLight z-20">Welcome! {{ welcomeText }}</p>
+                <p class="text-xl text-center textColorLight z-20">
+                    Welcome! {{ welcomeText }}
+                </p>
             </div>
         </div>
     </AuthLayout>
