@@ -19,6 +19,11 @@ class JournalEntry extends Model
         'updated_at' => 'datetime',
     ];
 
+    // protected $hidden = [
+    //     'user_id',
+    //     'id',
+    // ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

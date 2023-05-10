@@ -20,10 +20,13 @@ class JournalEntryFactory extends Factory
     public function definition(): array
     {
         return [
+            // 'user_id' => 1,
             'user_id' => function () {
                 return User::all()->random()->id;
             },
-            'entry' => $this->faker->paragraph(3)
+            'entry' => $this->faker->paragraph(3),
+            'created_at' => '2023-05-09 18:57:56',
+            'updated_at' => '2023-05-09 18:57:56'
         ];
     }
 }

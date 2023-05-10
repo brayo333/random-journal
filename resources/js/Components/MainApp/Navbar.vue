@@ -99,7 +99,7 @@ const logout = () => {
                     </p>
 
                     <div
-                        class="p-5 rounded-2xl appBgColorWhite absolute right-0 -bottom-24"
+                        class="p-5 rounded-2xl appBgColorWhite absolute right-0 -bottom-24 z-30"
                         :class="showDropdown ? '' : 'hidden'"
                     >
                         <div>

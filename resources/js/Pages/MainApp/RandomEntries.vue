@@ -37,9 +37,9 @@ const convertDateTime = (timeString) => {
 
                 <div v-else class="w-full flex flex-col justify-center items-center">
                     <p class="text-center">
-                        No entries found. The random entries are updated
+                        No entries found. The random entries are sent via email
                         everyday at 12:00pm (noon, EAT) and are only visible to those
-                        who shared an entry between 12:00pm (EAT) and now.
+                        who shared an entry between yesterday 12:00pm (EAT) and today 12:00pm (EAT).
                     </p>
                 </div>
             </div>
