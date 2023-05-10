@@ -1,66 +1,40 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+The application allows users to register, login and make their own journal entries which will be shared anonymously with other users. Users who make an entry between 12pm the previous day and 24hrs from that time receive an email (emails are sent daily at 12pm) with journal entries from other users who shared an entry within the same timeframe. These users may also see the journal entries on the web app only if they meet the same criteria that applies for receiving the email.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The application is made using Laravel, Vue.js and Inertia (PHP and JavaScript). With Tailwind providing a lot of the CSS classes.
 
-## About Laravel
+## Prerequisites
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Composer
+- Node.js - v16.0.0 + (make sure to add the path to the nodejs application in your system environment variables so as to run the node command from anywhere when using the terminal)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Project setup/Installation locally
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- First, clone the project using `git clone https://github.com/brayo333/random-journal.git` on a terminal
+- Next, change directory into the cloned project and run `composer install` in a terminal
+- Create a `.env` file from `.env.example` by running `cp .env.example .env`
+- Make the necessary configuration changes in the `.env` file
+- Run `php artisan key:generate` to generate a key for your application (for encryption)
+- Run `php artisan migrate` to create the database
+- Run `npm install` to install Node dependancies (for Vue)
 
-## Learning Laravel
+You will need two terminals running for the next two: 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Run `php artisan serve` to run the server locally
+- Run `npm run dev` to run the Vue pages (UI/frontend) locally
+- View app locally on a browser on the link `http://127.0.0.1:8000/` or `http://localhost:8000/`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+You can use another terminal:
+- Run `php artisan schedule:work` to run the scheduler on the foreground ('manually') to test email sending functionality
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Project setup production pointers
 
-## Laravel Sponsors
+- Remember to change the app environment to 'production' and make necessary changes in the `.env`
+- Run `npm run build` to generate a production build for the frontend
+- You can use `php artisan optimze` to cache server configurations and routes
+- You can use `php artisan optimze:clear` to clear the cache
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Run `php artisan schedule:run` to run the scheduler on the background for (sending emails). You will need to create a cron on your server for the application. Read this [article](https://www.iankumu.com/blog/laravel-scheduler/).
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This package is an open-sourced software licensed under the [MIT license](LICENSE.txt).
