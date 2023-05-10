@@ -21,7 +21,7 @@ class JournalEntryController extends Controller
         $this->middleware('auth:sanctum')->except('sendDailyEmail');
 
         $this->yesterday = Carbon::yesterday()->setTime(12, 0, 0); // 12pm previous day
-        $this->today = Carbon::today()->setTime(22, 0, 0); // 12pm today
+        $this->today = Carbon::today()->setTime(12, 0, 0); // 12pm today
     }
     /**
      * Display a listing of the resource.
