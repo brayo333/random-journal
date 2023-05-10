@@ -104,12 +104,12 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--dashColor-dark);
+    background: var(--appColor-dark);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--dashColor-darkAccent);
+    background: var(--appColor-darkAccent);
 }
 
 /* Auth page background styles */
@@ -134,4 +134,11 @@ body {
 }
 .linkHover:hover {
     color: var(--appColor-darkAccent);
+}
+
+/* Imgae styling */
+.maintainRatio {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

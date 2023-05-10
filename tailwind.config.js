@@ -20,6 +20,7 @@ module.exports = {
             "2xl-min": { min: "1536px" },
             "2xl": { max: "1535px" },
 
+            "xl-min": { min: "1280px" },
             xl: { max: "1279px" },
 
             "lg-min": { min: "1024px" },
