@@ -59,16 +59,27 @@ class JournalEntryController extends Controller
         //         'id' => 1,
         //         'name' => 'Brian',
         //         'email' => 'hello@brianmulaa.com'
+        //     ],
+        //     (object) [
+        //         'id' => 7,
+        //         'name' => 'B M',
+        //         'email' => 'mulaabrian@gmail.com'
         //     ]
         // ];
+
+        $sentEntries = [];
 
         foreach ($users as $user) {
             $did_user_post = JournalEntry::query()->where('user_id', $user->id)->whereBetween('created_at', [$this->yesterday, $this->today])->get();
 
             if (count($did_user_post) > 0) {
-                $query = JournalEntry::query()->where('user_id', '!=', $user->id)->whereBetween('created_at', [$this->yesterday, $this->today])->get();
+                // $query = JournalEntry::query()->where('user_id', '!=', $user->id)->whereBetween('created_at', [$this->yesterday, $this->today])->get();
+                $query = JournalEntry::query()->where('user_id', '!=', $user->id)->whereBetween('created_at', [$this->yesterday, $this->today])->whereNotIn('id', $sentEntries)->inRandomOrder()->first();
 
-                Mail::to($user->email)->send(new DailyRandomEntryEmail($query));
+                if (!empty($query)) {
+                    Mail::to($user->email)->send(new DailyRandomEntryEmail([$query]));
+                    $sentEntries = array_merge($sentEntries, array($query->id));
+                }
             }
         }
     }
